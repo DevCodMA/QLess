@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <title>QLess</title>
+  <!-- MDB icon -->
+  <link rel="icon" href="static/img/logo.png" type="image/x-icon" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <!-- Google Fonts Roboto -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" />
+  <!-- MDB -->
+  <link rel="stylesheet" href="static/css/mdb.min.css" />
+  <link href="static/style2.css" rel="stylesheet">
+</head>
+
+<body class="indexbody">
+
+  <div id="SplashScreen">
+    <div class="progress">
+      <div class="progress-bar pcolor" id="pbar" role="progressbar" aria-valuenow="10" aria-valuemin="0"
+        aria-valuemax="100"></div>
+    </div>
+    <div id="splashimgDiv">
+      <img src="static/img/logo.png" id="splashimg">
+    </div>
+    <h1 style="margin-top:25px">
+      <span class="let1">Q</span>
+      <span class="let2">L</span>
+      <span class="let3">e</span>
+      <span class="let4">s</span>
+      <span class="let5">s</span>
+    </h1>
+  </div>
+
+  <div class="" style="display:none" id="mainDiv">
+    <!-- Just an image -->
+
+    <div class="card" id="logreg" align="center">
+      <div class="container-fluid">
+        <div class="btn-group" role="group" style="margin-top:-30px;">
+          <button type="button" class="btn indexbtn tb" id="logbtn" style="border-right: 0px;">Login</button>
+          <button type="button" class="btn indexbtn tb" id="regbtn" style="border-left: 0px;">Register</button>
+        </div>
+
+        <div class="col-lg-10 mx-auto" style="margin-top:100px;" id="logdiv">
+          <select class="form-select" id="userType">
+            <option selected>Select User</option>
+            <option value="admin">Admin</option>
+            <option value="customer">Customer</option>
+          </select>
+
+          <div class="form-outline">
+            <input type="text" id="uname" class="form-control forms2" />
+            <label class="form-label" for="uname">Username</label>
+          </div>
+
+          <div class="form-outline">
+            <input type="password" id="pswd" class="form-control forms2" />
+            <label class="form-label" for="pswd">Password</label>
+          </div>
+
+          <div class="row" style="margin-top: 15px;">
+            <div class="col-lg-6">
+              <div class="form-check" align="left" style="margin-left:-20px">
+                <!-- <input class="form-check-input" type="checkbox" id="signed" /> -->
+                <i class="fa-regular fa-square" id="signed" role="button" style="font-size:20px; color:#54823a"></i>
+                <label class="form-check-label" for="signed" style="color:#54823a; font-size:13px">Stay logged in</label>
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <div align="right">
+                <a role="button" class="forgot-password" data-mdb-toggle="modal" data-mdb-target="#forgotModal">Forgot Password</a>
+              </div>
+            </div>
+          </div>
+          
+          <button class="btn btn-block indexbtn" style="margin-top:15px" id="login">Login</button>
+        </div>
+
+        <div class="col-lg-10 mx-auto" style="display: none; margin-top:60px" id="regdiv">
+          <div id="regp1">
+            <div class="form-outline">
+              <input type="text" id="fname" class="form-control forms2" />
+              <label class="form-label" for="fname">Full Name</label>
+            </div>
+            <div class="form-outline">
+              <input type="text" id="uname2" class="form-control forms2" />
+              <label class="form-label" for="uname2">Username</label>
+            </div>
+            <div class="form-outline">
+              <input type="tel" id="phone" class="form-control forms2" />
+              <label class="form-label" for="phone">Phone</label>
+            </div>
+            <div class="form-outline">
+              <input type="password" id="pswd2" class="form-control forms2" />
+              <label class="form-label" for="pswd2">Password</label>
+            </div>
+            <div class="form-outline">
+              <input type="password" id="cpswd2" class="form-control forms2" />
+              <label class="form-label" for="cpswd2">Confirm Password</label>
+            </div>
+            <button class="btn btn-block indexbtn" style="margin-top:15px" id="register">Register</button>
+          </div>
+          <div id="regp2" style="margin-top:135px; display: none">
+            <div class="form-outline">
+              <input type="text" id="otp2" class="form-control forms2" />
+              <label class="form-label" for="otp2">Enter the OTP</label>
+            </div>
+            <label id="counter2" style="color: #54823a; font-weight: bold; font-size: 16px;margin-top:10px;margin-bottom:15px;"></label>
+            <br/>
+            <button type="button" class="btn btn-block indexbtn" id="otpbtn2">Submit</button>
+            <button type="button" class="btn btn-block indexbtn" id="backbtn">Back</button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Forgot Password -->
+<div class="modal fade" id="forgotModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" style="background-color: rgba(37, 37, 37, 0.719)">
+      <div class="modal-header" style="border: none">
+        <h5 class="modal-title text-light">Password Recovery</h5>
+        <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div id="usernamediv">
+          <div class="col-lg-10 mx-auto">
+            <div class="form-outline">
+              <input type="text" id="uname3" class="form-control forms2" />
+              <label class="form-label" for="uname3">Username</label>
+            </div>
+            <br/>
+            <button type="button" class="btn btn-block indexbtn" id="otpinitbtn">Submit</button>
+          </div>
+        </div>
+
+        <div id="otpdiv" style="display: none">
+          <div class="col-lg-10 mx-auto">
+            <div class="form-outline">
+              <input type="text" id="otp" class="form-control forms2" />
+              <label class="form-label" for="otp">Enter the OTP</label>
+            </div>
+            <label id="counter" style="color: #54823a; font-weight: bold; font-size: 16px;margin-top:10px;margin-bottom:15px;"></label>
+            <br/>
+            <button type="button" class="btn btn-block indexbtn" id="otpbtn">Submit</button>
+          </div>
+        </div>
+
+        <div id="passworddiv" style="display: none">
+          <div class="col-lg-10 mx-auto">
+            <div class="form-outline">
+              <input type="password" id="pswd3" class="form-control forms2" />
+              <label class="form-label" for="pswd3">New Password</label>
+            </div>
+
+            <div class="form-outline">
+              <input type="password" id="cpswd3" class="form-control forms2" />
+              <label class="form-label" for="cpswd3">Confirm Password</label>
+            </div>
+
+            <br/>
+            <button type="button" class="btn btn-block indexbtn" id="pswdbtn">Submit</button>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer" style="border: none">
+      </div>
+    </div>
+  </div>
+</div>
+
+  <!-- MDB -->
+  <script type="text/javascript" src="static/js/mdb.min.js"></script>
+  <!-- Custom scripts -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  {% if load %}
+  <script>
+    $("#SplashScreen").css("display", "none")
+    $("#mainDiv").css("display", "block")
+    $("#smod").click()
+  </script>
+  {% endif %}
+
+  <script>
+    $(document).ready(function () {
+      var progressBar = $('#pbar');
+      progressBar.animate({
+        width: '100%'
+      }, 2510, function () {
+        progressBar.attr('aria-valuenow', '100');
+      });
+      setTimeout(() => {
+        $("#SplashScreen").css("display", "none")
+        $("#mainDiv").css("display", "block")
+      }, 3000);
+    });
+
+    checked = false
+    $("#signed").click(function(){
+      if (!checked){
+        $("#signed").attr("class", "fa-solid fa-square-check")
+        checked = true
+      } else{
+        $("#signed").attr("class", "fa-regular fa-square")
+        checked = fasle
+      }
+    })
+
+    check = true
+    function startTimer(duration, display, div1, div2) {
+      var timer = duration, minutes, seconds;
+      timerInterval = setInterval(function () {
+        minutes = parseInt(timer / 60, 10);
+        seconds = parseInt(timer % 60, 10);
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        console.log(seconds)
+
+        display.html("OTP Expired in " + minutes + ":" + seconds)
+
+        if (timer == 0 ) {
+          clearInterval(timerInterval);
+          display.html("OTP Expired!")
+          if(check){
+            div1.slideUp("slow")
+            div2.slideDown("slow")
+          }
+        } else {
+          timer--;
+        }
+      }, 1000);
+    }
+
+
+    let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    $("#logbtn").click(function () {
+      $("#regdiv").slideUp("slow")
+      $("#logdiv").slideDown("slow")
+    })
+
+    $("#regbtn").click(function () {
+      $("#logdiv").slideUp("slow")
+      $("#regdiv").slideDown("slow")
+    })
+
+    $("#backbtn").click(function(){
+      $("#regp2").slideUp("slow")
+      $("#regp1").slideDown("slow")
+    })
+
+
+    otp = "000000"
+    $("#otpinitbtn").click(function(){
+      check = true
+      uname3 = $("#uname3").val()
+      if (uname != "" && emailPattern.test(uname3)){
+        $("#usernamediv").slideUp("slow")
+        $.ajax({
+        url: "/generate_otp",
+        method: "POST",
+        data:{
+          uname: uname3
+        },
+        success: function(response){
+          otp = response
+          $("#otpdiv").slideDown("slow")
+          startTimer(8*60, $("#counter"), $("#otpdiv"), $("#usernamediv"))
+        }
+      })
+      }else{
+        alert("Please enter a valid username!")
+      }
+
+    })
+
+    $("#otpbtn").click(function(){
+      console.log(otp)
+      if ($("#otp").val() == otp){
+        check = false
+        $("#otpdiv").slideUp("slow")
+        $("#passworddiv").slideDown("slow")
+      } else{
+        alert("Invalid OTP!")
+      }
+    })
+
+    $("#pswdbtn").click(function(){
+      npswd = $("#pswd3").val()
+      ncpswd = $("#cpswd3").val()
+      if (npswd != "" && (npswd == ncpswd)){
+        $.ajax({
+          url: "/change_password",
+          method: "POST",
+          data:{
+            pswd: npswd
+          },
+          success: function(response){
+            alert(response.message)
+              $("#passworddiv").slideUp("slow")
+              $("#usernamediv").slideDown("slow")
+          }
+        })
+
+      }else{
+        alert("Please enter a valid password!")
+      }
+    })
+
+
+    $("#login").click(function () {
+
+      let uname = $("#uname").val()
+      let pswd = $("#pswd").val()
+      let userType = $("#userType").val()
+
+      if (uname != "" || pswd != "" || emailPattern.test(uname)) {
+        $.ajax({
+          url: "/login",
+          method: "POST",
+          data: {
+            uname: uname,
+            pswd: pswd,
+            userType: userType,
+            signed: checked
+          },
+          success: function (response) {
+            if (response.success){
+              var expires = new Date();
+              expires.setTime(expires.getTime() + (365 * 24 * 60 * 60 * 1000));
+              document.cookie = "cred=" + JSON.stringify(response.data) + ";expires=" + expires.toUTCString() + ";path=/";
+              window.location.href = response.redirect;
+            }else{
+              alert(response)
+            }
+          }
+        })
+        
+      } else { 
+        alert("Please fill in all the required fields")
+      }
+
+    })
+
+
+    $("#register").click(function () {
+      let fname = $("#fname").val()
+      let uname2 = $("#uname2").val()
+      let pswd2 = $("#pswd2").val()
+      let cpswd2 = $("#cpswd2").val()
+      let phone = $("#phone").val()
+
+      if (uname2 != "" && pswd2 != "" && fname != "" && phone != "" || emailPattern.test(uname2)) {
+        if (pswd2 == cpswd2) {
+          $.ajax({
+            url: "/saveRegData",
+            method: "POST",
+            data: {
+              uname: uname2,
+              pswd: pswd2,
+              fname: fname,
+              phone: phone
+            },
+            success: function (response) {
+              if(response.success){
+                $("#regp1").slideUp("slow")
+                $("#regp2").slideDown("slow")
+              } else{
+                alert("OTP generation failed!")
+              }
+            }
+          })
+        }
+        else {
+          alert("Mismatching password!")
+        }
+        
+      } else {
+        alert("Please fill in all the required fields")
+      }
+
+    })
+
+
+    $("#otpbtn2").click(function(){
+      otp2 = $("#otp2").val()
+      if (otp2 != ""){
+        $.ajax({
+        url: "/generateAndValidate",
+        method: "POST",
+        data: {
+          otp: otp2
+        },
+        success: function(response){
+          if(response.success){
+            $("#fname").val("")
+            $("#uname2").val("")
+            $("#pswd2").val("")
+            $("#cpswd2").val("")
+            $("#phone").val("")
+            $("#fname").focusout()
+            $("#uname2").focusout()
+            $("#pswd2").focusout()
+            $("#cpswd2").focusout()
+            $("#phone").focusout()
+            $("#regp2").slideUp("slow")
+            alert(response.message)
+            $("#regp1").slideDown("slow")
+          }else{
+            alert(response.message)
+          }
+        }
+      })
+      }
+    })
+
+    
+
+  </script>
+
+</body>
+
+</html>
