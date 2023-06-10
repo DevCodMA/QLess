@@ -264,6 +264,9 @@ def getdata():
     tprice = conn.execute("SELECT SUM(QUANTITY*PRICE) FROM PURCHASES WHERE BILLNO IN (SELECT BILLNO FROM INVOICES WHERE DATE=?)", (datetime.now().date(),)).fetchone()[0]
     nfeed = conn.execute("SELECT COUNT(*) FROM FEEDBACKS").fetchone()[0]
     sales = conn.execute("SELECT DISTINCT PRODUCT FROM PURCHASES").fetchall()
+    tprice = 0 if tprice == None else tprice
+    norder = 0 if norder == None else norder
+
     ls = []
     print(sales)
     for i in sales:
@@ -271,10 +274,10 @@ def getdata():
         if c[0] != None:
             ls.append([i[0], c[0]])
     print(ls)
-    sales = ls
+    sales = False if len(ls) == 0 else ls
     # print(sales)
     items = conn.execute("SELECT PRODUCT, PRICE FROM PRODUCTS").fetchall()
-    print(sales)
+    print(nuser)
     return jsonify({'users':nuser, 'orders':norder, 'tprice':tprice, 'feeds':nfeed, 'sales': sales, 'products': items})
 
 @app.route('/addfoods', methods=["POST"])

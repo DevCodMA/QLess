@@ -362,14 +362,19 @@ span {
 
 #uname, #pswd, #uname2, #pswd2, #fname, #cpswd2, #phone, #userType, #uname3, #otp, #pswd3, #cpswd3, #otp2{
   background-color: white;
-  margin-top:10px;
   height:45px;
   font-weight: bold;
 }
-
+/*
 #uname+label, #pswd+label, #uname2+label, #pswd2+label, #fname+label, #cpswd2+label, #phone+label, #uname3+label, #otp+label, #pswd3+label, #cpswd3+label, #otp2+label{
   margin-top:5px;
   font-weight: bold;
+} */
+
+.label{
+  color: red;
+  font-size:13px;
+  font-weight: bold
 }
 
 

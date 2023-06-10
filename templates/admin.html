@@ -69,11 +69,13 @@
                             <div id="d3">Today's Order: 10</div>
                         </div>
                     </div>
-                    
+
                 </div>
                 <br />
                 <h4 style="font-weight: bold; margin-bottom: 0px; margin-top:10px;">Sales Report</h4>
-                <div id="chart_div"></div>
+                <div id="chart_div">
+                    <div style="font-size:16px; font-weight: bold; color: red" align="center">No products sold yet</div>
+                </div>
 
             </div>
             <div class="" id="customers" style="display:none">
@@ -404,7 +406,7 @@
             pswd = $("#cpswd").val()
             npswd = $("#npswd").val()
             npswd2 = $("#npswd2").val()
-            if (pswd != "" && npswd != "" && npswd == npswd2 && npswd.length>=8) {
+            if (pswd != "" && npswd != "" && npswd == npswd2 && npswd.length >= 8) {
                 $.ajax({
                     url: "/change_password2",
                     method: "POST",
@@ -416,8 +418,8 @@
                         alert(response.message)
                     }
                 })
-            }else{
-              alert("Invalid password")
+            } else {
+                alert("Invalid password")
             }
         })
 
@@ -456,11 +458,15 @@
                 url: "/getdata",
                 method: "POST",
                 success: function (response) {
+                    if (response.sales == false) {
 
-                    salesData = response.sales
-                    maxVal = salesData.reduce(function (prev, curr) {
-                        return (prev[1] > curr[1]) ? prev : curr;
-                    })[1];
+                    } else {
+                        salesData = response.sales
+                        maxVal = salesData.reduce(function (prev, curr) {
+                            return (prev[1] > curr[1]) ? prev : curr;
+                        })[1];
+                        google.charts.setOnLoadCallback(drawChart);
+                    }
                     $("#d1").html("Total Customers: " + response.users)
                     $("#d2").html("Today's Revenue: " + response.tprice)
                     $("#d3").html("Today's Orders: " + response.orders)
@@ -469,9 +475,9 @@
                     products = response.products
                     price = $.map(products, function (item) { return item[1]; });
                     products = $.map(products, function (item) { return item[0]; });
-                    console.log(products)
 
-                    google.charts.setOnLoadCallback(drawChart);
+
+                    
                 }
             })
         }
@@ -614,13 +620,13 @@
         }
 
 
-        function printInvoice(data){
+        function printInvoice(data) {
             console.log(data)
             datals = [data[0], data[1], data[2], data[4]]
             print2pdf(datals)
         }
 
-        function removeInvoice(data){
+        function removeInvoice(data) {
             $.ajax({
                 url: "/removeinvoice",
                 method: "POST",
@@ -799,16 +805,16 @@
                 url: "/addinvoices",
                 method: "POST",
                 contentType: 'application/json',
-                data:JSON.stringify(data),
-                success: function(response){
-                    if(response.success){
+                data: JSON.stringify(data),
+                success: function (response) {
+                    if (response.success) {
                         print2pdf(data)
-                    } else{
+                    } else {
                         alert("Failed to print")
                     }
                 }
             })
-            
+
         })
 
     </script>
