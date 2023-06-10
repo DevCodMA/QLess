@@ -268,9 +268,11 @@ def getdata():
     print(sales)
     for i in sales:
         c = conn.execute(f"SELECT SUM(QUANTITY) FROM PURCHASES WHERE PRODUCT='{i[0]}' AND BILLNO IN (SELECT BILLNO FROM INVOICES WHERE DATE='{year+'-'+month+'-'+day}')").fetchone()
-        ls.append([i[0], c[0]])
+        if c[0] != None:
+            ls.append([i[0], c[0]])
+    print(ls)
     sales = ls
-    print(sales)
+    # print(sales)
     items = conn.execute("SELECT PRODUCT, PRICE FROM PRODUCTS").fetchall()
     print(sales)
     return jsonify({'users':nuser, 'orders':norder, 'tprice':tprice, 'feeds':nfeed, 'sales': sales, 'products': items})
