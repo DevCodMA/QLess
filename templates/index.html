@@ -46,11 +46,13 @@
           <button type="button" class="btn indexbtn tb" id="regbtn" style="border-left: 0px;">Register</button>
         </div>
 
-        <div class="col-lg-10 mx-auto" style="margin-top:100px;" id="logdiv">
+        <div class="col-lg-10 mx-auto" style="margin-top:60px;" id="logdiv">
+          <div align="justify">
+            <label style="color: #54823a; font-size:13px;">Select the user</label>
+          </div>
           <select class="form-select" id="userType">
-            <option selected>Select User</option>
-            <option value="admin">Admin</option>
             <option value="customer">Customer</option>
+            <option value="admin">Admin</option>
           </select>
 
           <div class="form-group">
@@ -106,8 +108,7 @@
           </div>
           <div id="regp2" style="margin-top:135px; display: none">
             <div class="form-group">
-              <input type="text" id="otp2" class="form-control forms2" />
-              <label class="form-label" for="otp2">Enter the OTP</label>
+              <input type="text" id="otp2" class="form-control forms2" placeholder="Enter the OTP"/>
             </div>
             <label id="counter2" style="color: #54823a; font-weight: bold; font-size: 16px;margin-top:10px;margin-bottom:15px;"></label>
             <br/>
@@ -132,7 +133,7 @@
       <div class="modal-body">
         <div id="usernamediv">
           <div class="col-lg-10 mx-auto">
-            <div class="form-outline">
+            <div class="form-group">
               <label class="label" id="uname3label"></label>
               <input type="text" id="uname3" class="form-control" placeholder="Enter the Email ID" />
             </div>
@@ -144,7 +145,7 @@
         <div id="otpdiv" style="display: none">
           <div class="col-lg-10 mx-auto">
             <div class="form-group">
-              <label class="form-label" id="otplabel"></label>
+              <label class="label" id="otplabel"></label>
               <input type="text" id="otp" class="form-control" placeholder="Enter the OTP" />
               
             </div>
@@ -215,6 +216,18 @@
         checked = fasle
       }
     })
+
+    function view_password(id){
+      var passwordInput = $(id);
+
+        if (passwordInput.attr("type") === "password") {
+          passwordInput.attr("type", "text");
+          $(this).text("Hide");
+        } else {
+          passwordInput.attr("type", "password");
+          $(this).text("Show");
+        }
+    }
 
     check = true
     function startTimer(duration, display, div1, div2) {

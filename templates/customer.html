@@ -162,7 +162,6 @@
     </table>
 
   </div>
-  <input type="hidden" id="fname" value="{{fname}}">
 
   <!-- MDB -->
   <script type="text/javascript" src="static/js/mdb.min.js"></script>
@@ -238,7 +237,7 @@
       currentY += 80;
       pdf.text("Bill Date: " + data[1], 50, currentY);
       currentY += 80;
-      pdf.text("Customer Name: " + $("#fname").val(), 50, currentY);
+      pdf.text("Customer Name: " + user_name, 50, currentY);
       currentY += 80;
 
       pdf.addImage(imgData, 'PNG', 1980, 90, 280, 260);
@@ -417,7 +416,7 @@
 
     }
 
-
+    user_name = ""
     function getinvoicedata() {
       $.ajax({
         url: "/getinvoices2",
@@ -425,7 +424,7 @@
         success: function (response) {
           data = ""
           for (let i = 0; i < response.data.length; i++) {
-
+            user_name = response.data[i][4]
             data = data + "<tr>" +
               + "<td>" + response.data[i][0] + "</td>"
               + "<td>" + response.data[i][0] + "</td>"

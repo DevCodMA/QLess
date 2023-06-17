@@ -441,11 +441,12 @@ def getinvoices2():
     cursor = conn.cursor()
     ls = []
     try:
+        name = conn.execute(f"SELECT FNAME FROM USERS WHERE UNAME='{user}'").fetchone()[0]
         data = conn.execute(f"SELECT BILLNO, DATE FROM INVOICES WHERE UID='{user}'").fetchall()
         for i in data:
             d2 = conn.execute(f"SELECT SUM(PRICE*QUANTITY) FROM PURCHASES WHERE BILLNO='{i[0]}'").fetchone()[0]
             d3 = conn.execute(f"SELECT PRODUCT, QUANTITY, PRICE FROM PURCHASES WHERE BILLNO={i[0]}").fetchall()
-            ls.append([i[0], i[1], d2, d3])      
+            ls.append([i[0], i[1], d2, d3, name])      
         return jsonify({'success': True, 'data': ls})
     except Exception as ex:
         print(ex)

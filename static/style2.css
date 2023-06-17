@@ -365,11 +365,6 @@ span {
   height:45px;
   font-weight: bold;
 }
-/*
-#uname+label, #pswd+label, #uname2+label, #pswd2+label, #fname+label, #cpswd2+label, #phone+label, #uname3+label, #otp+label, #pswd3+label, #cpswd3+label, #otp2+label{
-  margin-top:5px;
-  font-weight: bold;
-} */
 
 .label{
   color: red;
