@@ -281,7 +281,6 @@
       check = true
       uname3 = $("#uname3").val()
       if (uname != "" && emailPattern.test(uname3)){
-        $("#usernamediv").slideUp("slow")
         $.ajax({
         url: "/generate_otp",
         method: "POST",
@@ -289,9 +288,15 @@
           uname: uname3
         },
         success: function(response){
-          otp = response
-          $("#otpdiv").slideDown("slow")
-          startTimer(8*60, $("#counter"), $("#otpdiv"), $("#usernamediv"))
+          console.log(response)
+          if (response.success){
+            $("#usernamediv").slideUp("slow")
+            otp = response
+            $("#otpdiv").slideDown("slow")
+            startTimer(8*60, $("#counter"), $("#otpdiv"), $("#usernamediv"))
+          } else{
+            $("#uname3label").html("Account not found!")
+          }
         }
       })
       }else{

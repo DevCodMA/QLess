@@ -189,12 +189,18 @@
                 response[i][1][j][1],  //Quantity
                 response[i][1][j][3]  //Image
               ]
+              qty = response[i][1][j][1]
+              dval = ""
+              if (qty == 0){
+                dval = "<br/><b style='color: red'>Out of Stock</b></p>"
+              }else{
+                dval = "<br/>Available quantity: " + qty + "</p>"
+              }
               dstr += "<div class='col-lg-3'><div class='card'>" +
                 "<img src='" + response[i][1][j][3] + "' class='card-img-top' style='height: 200px' />" +
                 "<div class='card-body' align='center'>" +
                 "<h6 class='card-title'>" + response[i][1][j][0] + "</h6>" +
-                "<p class='card-text'>Price: ₹" + response[i][1][j][2] +
-                "<br/>Available quantity: " + response[i][1][j][1] + "</p>" +
+                "<p class='card-text'>Price: ₹" + response[i][1][j][2] +dval+
                 "<input type='number' min=1 max=999 style='border: 2px solid rgba(0,0,0,0.75); border-radius:20px;text-align:center;margin-right:10px;height: 40px;' value=1 onkeyup='validate(\"#tbox" + i + "" + j + "\")' id='tbox" + i + "" + j + "'>" +
                 "<button class='btn btns' onclick='add2cart(" + JSON.stringify(respdata) + ")'>Add to cart</button>" +
                 "</div>" +

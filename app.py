@@ -98,7 +98,7 @@ def index():
         data =  json.loads(request.cookies.get('cred'))
         if data != None:
             fname = data.get('fname')
-            print(fname)
+            #print(fname)
             uname = data.get('uname')
             signed = data.get('signed')
             userType = data.get('userType')
@@ -108,7 +108,7 @@ def index():
             user = uname
             if signed == 'true' and validate(uname, pswd, userType)[0]:
                 check = True
-                print(userType)
+                #print(userType)
                 if userType == 'admin':
                     return render_template('admin.html', fname=fname, uname=uname)
                 elif userType == 'customer':
@@ -214,7 +214,13 @@ def generate_otp():
     global user
     uname3 = request.form["uname"]
     user = uname3
-    return generateOTP(uname3)
+    conn = sql.connect(r"Files/cms.db")
+    res = conn.execute(f"SELECT COUNT(*) FROM USERS WHERE UNAME='{user}'").fetchone()[0]
+    #print(res)
+    if res != 0:
+        return jsonify({'otp': generateOTP(uname3), 'success': True})
+    else:
+        return jsonify({'sucess': False})
 
 @app.route('/change_password', methods=["POST"])
 def change_password():
@@ -222,7 +228,7 @@ def change_password():
     conn = sql.connect(r"Files/cms.db")
     cursor = conn.cursor()
     ld = cursor.execute(f"UPDATE USERS SET PSWD='{pswd}' WHERE UNAME='{user}'")
-    print(ld, user, pswd)
+    ##print(ld, user, pswd)
     conn.commit()
     return jsonify({'success': True, 'message': 'Password changed successfull'})
 
@@ -232,7 +238,7 @@ def change_password2():
     cpswd = hash(request.form["pswd"])
     conn = sql.connect(r"Files/cms.db")
     cursor = conn.cursor()
-    print(uType)
+    ##print(uType)
     if uType == "admin":
         res = conn.execute(f"SELECT PSWD FROM ADMIN WHERE UNAME='{user}'").fetchone()[0]
         if res == cpswd:
@@ -268,16 +274,16 @@ def getdata():
     norder = 0 if norder == None else norder
 
     ls = []
-    print(sales)
+    ##print(sales)
     for i in sales:
         c = conn.execute(f"SELECT SUM(QUANTITY) FROM PURCHASES WHERE PRODUCT='{i[0]}' AND BILLNO IN (SELECT BILLNO FROM INVOICES WHERE DATE='{year+'-'+month+'-'+day}')").fetchone()
         if c[0] != None:
             ls.append([i[0], c[0]])
-    print(ls)
+    ##print(ls)
     sales = False if len(ls) == 0 else ls
-    # print(sales)
+    # #print(sales)
     items = conn.execute("SELECT PRODUCT, PRICE FROM PRODUCTS").fetchall()
-    print(nuser)
+    #print(nuser)
     return jsonify({'users':nuser, 'orders':norder, 'tprice':tprice, 'feeds':nfeed, 'sales': sales, 'products': items})
 
 @app.route('/addfoods', methods=["POST"])
@@ -295,7 +301,7 @@ def addfood():
         conn.commit()
         return jsonify({'success': True})
     except Exception as ex:
-        print(ex)
+        #print(ex)
         return jsonify({'success': False})
     
 
@@ -316,7 +322,7 @@ def getfood():
             
         return jsonify({'success': True, 'data': ls})
     except Exception as ex:
-        print(ex)
+        #print(ex)
         return jsonify({'success': False})
     
 
@@ -334,7 +340,7 @@ def getinvoices():
             ls.append([i[1], d1, i[2], d2, d3])      
         return jsonify({'success': True, 'data': ls})
     except Exception as ex:
-        print(ex)
+        #print(ex)
         return jsonify({'success': False})
 
 
@@ -348,7 +354,7 @@ def removefood():
         conn.commit()    
         return jsonify({'success': True})
     except Exception as ex:
-        print(ex)
+        #print(ex)
         return jsonify({'success': False})
     
 @app.route('/editfoods', methods=["POST"])
@@ -364,7 +370,7 @@ def editfood():
         conn.commit()
         return jsonify({'success': True})
     except Exception as ex:
-        print(ex)
+        #print(ex)
         return jsonify({'success': False})
     
 
@@ -402,7 +408,7 @@ def removeinvoice():
         conn.commit()    
         return jsonify({'success': True})
     except Exception as ex:
-        print(ex)
+        #print(ex)
         return jsonify({'success': False})
 
 
@@ -449,7 +455,7 @@ def getinvoices2():
             ls.append([i[0], i[1], d2, d3, name])      
         return jsonify({'success': True, 'data': ls})
     except Exception as ex:
-        print(ex)
+        #print(ex)
         return jsonify({'success': False})
 
 if __name__ == '__main__':
