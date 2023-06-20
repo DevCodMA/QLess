@@ -624,6 +624,7 @@
                         $("#minvbody").html(data)
                     } else {
                         alert("Error")
+                        console.log(response)
                     }
                 }
             })
@@ -632,7 +633,7 @@
 
         function printInvoice(data) {
             console.log(data)
-            datals = [data[0], data[1], data[2], data[4]]
+            datals = [data[0], data[2], data[1], data[4]]
             print2pdf(datals)
         }
 
@@ -777,9 +778,9 @@
             // Populate bill details
             pdf.text("Bill Number: " + data[0], 50, currentY);
             currentY += 80;
-            pdf.text("Bill Date: " + data[2], 50, currentY);
+            pdf.text("Bill Date: " + data[1], 50, currentY);
             currentY += 80;
-            pdf.text("Customer Name: " + data[1], 50, currentY);
+            pdf.text("Customer Name: " + data[2], 50, currentY);
             currentY += 80;
 
             pdf.addImage(imgData, 'PNG', 1980, 90, 280, 260);
@@ -810,7 +811,7 @@
 
 
         $("#printprod").click(() => {
-            data = [$("#bno").val(), "SELF", $("#bdate").val(), prod_ls]
+            data = [$("#bno").val(), $("#bdate").val(), "SELF", prod_ls]
             $.ajax({
                 url: "/addinvoices",
                 method: "POST",
