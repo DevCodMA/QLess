@@ -17,7 +17,7 @@ def generateOTP(recpient: str) -> str:
     otp = random.randint(111111, 999999)
     server = smtplib.SMTP('smtp.gmail.com', 587)
     server.starttls()
-    uname, pswd = 'username', 'password'
+    uname, pswd = 'srnandanakrishna@gmail.com', 'xfelcqljswqospnx'
     server.login(uname, pswd)
         
     subject = 'OTP for verification'

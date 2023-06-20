@@ -296,6 +296,18 @@
   text-decoration: underline;
 }
 
+.hovereff:hover{
+  background-color: #a4ff71;
+}
+
+#foodlister{
+  width: 100%;
+}
+
+#foodlister::-webkit-scrollbar{
+  width: 0px;
+}
+
 .tb{
   padding-left: 25px; 
   padding-right:25px;

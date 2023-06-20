@@ -398,6 +398,8 @@
 
       if (uname2 != "" && pswd2 != "" && fname != "" && phone != "" && emailPattern.test(uname2)) {
         if (pswd2 == cpswd2) {
+          $("#regp1").slideUp("slow")
+          $("#regp2").slideDown("slow")
           $.ajax({
             url: "/saveRegData",
             method: "POST",
@@ -408,10 +410,6 @@
               phone: phone
             },
             success: function (response) {
-              if(response.success){
-                $("#regp1").slideUp("slow")
-                $("#regp2").slideDown("slow")
-              }
             }
           })
         }

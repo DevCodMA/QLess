@@ -192,7 +192,7 @@
                             <label for="prod_name">Product Name</label>
                             <input type="text" class="form-control" id="prod_name" oninput="showSuggestions()"
                                 placeholder="Enter the product">
-                            <div id="show_prod"></div>
+                            <div id="show_produs"></div>
                         </div>
                     </div>
                     <div class="col-lg-3">
@@ -489,23 +489,33 @@
         function showSuggestions() {
             var input = document.getElementById('prod_name');
             var filter = input.value.toLowerCase();
-            var list = document.getElementById('show_prod');
+            var list = document.getElementById('show_produs');
 
             // Clear existing suggestions
             list.innerHTML = '';
-
+            div = "<select id='foodlister' size=4 onclick='changevalues()'>"
             // Filter and display matching suggestions
             if (filter != "") {
                 products.forEach(function (item) {
                     if (item.toLowerCase().startsWith(filter)) {
-                        var listItem = document.createElement('div');
-                        listItem.textContent = item;
-                        list.appendChild(listItem);
+                        div += "<option value='"+item+"' class='hovereff'>"+item+"</option>"
                     }
                 });
+                div += "</select>"
+                $("#show_produs").html(div)
             } else {
                 list.innerHTML = '';
             }
+        }
+
+        $("#prod_name").focusout(function(){
+            setTimeout(function(){
+                $("#show_produs").html("")
+            }, 200)
+        })
+
+        function changevalues(){
+           $("#prod_name").val($("#foodlister").val())
         }
 
         $("#editfoodbtn").click(function () {
@@ -800,7 +810,7 @@
 
 
         $("#printprod").click(() => {
-            data = [$("#bno").val(), $("#bdate").val(), "SELF", prod_ls]
+            data = [$("#bno").val(), "SELF", $("#bdate").val(), prod_ls]
             $.ajax({
                 url: "/addinvoices",
                 method: "POST",
